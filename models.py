@@ -19,23 +19,25 @@ class Pet(db.Model):
 
     name = db.mapped_column(
         db.String(75),
-        nullable=False  # can't be unknown, a.k.a. required
+        nullable=False
     )
 
     species = db.mapped_column(
-        # to fill in
         db.String(75),
         nullable=False
     )
 
     photo_url = db.mapped_column(
-        db.String(200),  # TODO: where do I make it '' if not provided?
-        nullable=False
+        db.Text,
+        nullable=False,
+        default=""
     )
 
     age = db.mapped_column(
-        # to fill in
-        db.Text  # FIXME: check how to pick from provided options,
+        db.Text,
+        db.CheckConstraint(
+            "age IN " + "('baby', 'young', 'adult', 'senior')"),
+        nullable=False
     )
 
     notes = db.mapped_column(
@@ -44,8 +46,7 @@ class Pet(db.Model):
     )
 
     available = db.mapped_column(
-        # to fill in
         db.Boolean,
-        nullable=False
-        # TODO: add default to available
+        nullable=False,
+        default="available"
     )
