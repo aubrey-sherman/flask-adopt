@@ -36,17 +36,18 @@ class Pet(db.Model):
     age = db.mapped_column(
         db.Text,
         db.CheckConstraint(
+            # SINGLE QUOTES FOR SQL
             "age IN " + "('baby', 'young', 'adult', 'senior')"),
         nullable=False
     )
 
     notes = db.mapped_column(
-        db.Text
-        # TODO: confirm that nullable=True is implicit default
+        db.Text,
+        nullable=True  # FIXME: make nullable=False, empty string as default
     )
 
     available = db.mapped_column(
         db.Boolean,
         nullable=False,
-        default="available"
+        default=True
     )
