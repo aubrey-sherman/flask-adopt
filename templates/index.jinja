@@ -1,0 +1,34 @@
+{% extends 'base.jinja' %}
+
+{% block title %} Aubrey's Pet Adoption Agency {% endblock %}
+
+{% block content %}
+
+    <h3>Aubrey's Ador*aub*le Pets</h3>
+
+    <!--TODO: show name, photo (if present), display Available in bold if true-->
+    <div class="pets_area">
+
+        {% for pet in pets %}
+            <div class="row">
+            <div class="col-sm-2 col-6">
+                {# TODO: wrap img in a conditional to check whether pet.photo_url is truthy #}
+                <img
+                    src="{{ pet.photo_url }}"
+                    alt="{{ pet.name }}"
+                    class="img-fluid">
+
+            {{ pet.name }}
+
+            {% if pet.available %}
+            <b>is available!</b>
+            {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+    <a class="btn btn-primary" href="/add"role="button">Add a pet</a>
+
+{% endblock %}
